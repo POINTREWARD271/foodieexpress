@@ -1,0 +1,286 @@
+/* Base styles */
+:root {
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --depth-1: 0;
+    --depth-2: -2px;
+    --depth-3: -4px;
+    --depth-4: -6px;
+}
+
+.parallax-container {
+    perspective: 1px;
+    height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: linear-gradient(to bottom, #000 0%, #111 100%);
+}
+
+/* Enhanced parallax sections */
+.parallax-section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+/* Advanced layer effects */
+.parallax-layer {
+    position: absolute;
+    inset: -5%;
+    width: 110%;
+    height: 110%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transition: all 0.5s ease;
+}
+
+.layer-bg {
+    transform: translateZ(var(--depth-4)) scale(5);
+    filter: brightness(0.5) blur(2px);
+}
+
+.layer-mid {
+    transform: translateZ(var(--depth-3)) scale(4);
+    filter: brightness(0.6) contrast(1.1);
+}
+
+.layer-fore {
+    transform: translateZ(var(--depth-2)) scale(3);
+    filter: brightness(0.7) saturate(1.2);
+}
+
+/* Floating text animation */
+.floating-text {
+    font-size: 8rem;
+    font-weight: 900;
+    color: transparent;
+    background: linear-gradient(45deg, var(--primary), #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(249, 115, 22, 0.3);
+    animation: floatText 3s ease-in-out infinite;
+}
+
+/* Enhanced 3D Cards */
+.card-container {
+    display: flex;
+    gap: 2rem;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    padding: 2rem;
+}
+
+.card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    transform: rotateX(0) rotateY(0);
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 0, 0, 0.8)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    color: white;
+    transform: translateZ(30px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-content {
+    opacity: 1;
+    transform: translateZ(60px);
+}
+
+/* Interactive Gallery */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.gallery-item {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden;
+    transform: scale(1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 0, 0, 0.8)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+.gallery-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.float-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.float-item {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+    filter: blur(20px);
+    opacity: 0.6;
+    animation: float 6s infinite;
+}
+
+/* Scroll Progress */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    z-index: 1000;
+}
+
+/* CTA Button */
+.cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(249, 115, 22, 0.3);
+}
+
+/* Animations */
+@keyframes floatText {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(10px, -10px);
+    }
+    50% {
+        transform: translate(0, -20px);
+    }
+    75% {
+        transform: translate(-10px, -10px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-text {
+        font-size: 4rem;
+    }
+
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+}
